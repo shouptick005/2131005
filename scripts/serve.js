@@ -39,7 +39,14 @@ http.createServer((req, res) => {
     res.writeHead(308, { Location: target + url.search });
     return res.end();
   }
-  let file = resolve(url.pathname);
+  let file;
+  try {
+    file = resolve(url.pathname);
+  } catch (e) {
+    // e.g. "/%": decodeURIComponent throws on malformed escapes; don't take the server down.
+    res.writeHead(400, { 'Content-Type': 'text/plain; charset=utf-8' });
+    return res.end('Bad request');
+  }
   let status = 200;
   if (!file) {
     file = path.join(ROOT, '404.html');

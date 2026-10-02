@@ -253,8 +253,12 @@ const BAR_END = '<!-- /site:bar -->';
 const FOOT_START = '<!-- site:foot -->';
 const FOOT_END = '<!-- /site:foot -->';
 
-function stripBlock(html, start, end) {
-  const re = new RegExp(`\\n?${start}[\\s\\S]*?${end}\\n?`, 'g');
+/**
+ * Removes a block exactly as it was injected: marker to marker plus the one `\n` injected with it
+ * (`before` or `after`). The book's own line breaks, CRLF included, must never be touched.
+ */
+function stripBlock(html, start, end, { before = '', after = '' } = {}) {
+  const re = new RegExp(`${before}${start}[\\s\\S]*?${end}${after}`, 'g');
   return html.replace(re, '');
 }
 
@@ -263,9 +267,9 @@ function processBook(term, course, set) {
   const file = path.join(ROOT, rel);
   let html = fs.readFileSync(file, 'utf8');
 
-  html = stripBlock(html, HEAD_START, HEAD_END);
-  html = stripBlock(html, BAR_START, BAR_END);
-  html = stripBlock(html, FOOT_START, FOOT_END);
+  html = stripBlock(html, HEAD_START, HEAD_END, { after: '\\n' });
+  html = stripBlock(html, BAR_START, BAR_END, { before: '\\n' });
+  html = stripBlock(html, FOOT_START, FOOT_END, { after: '\\n' });
   html = html.replace(/href="(?:\.\.\/)*katex\/katex\.min\.css"/, 'href="/assets/katex/katex.min.css"');
 
   const used = new Set();
