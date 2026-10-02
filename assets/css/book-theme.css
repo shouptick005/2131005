@@ -1,0 +1,33 @@
+/* Loaded only inside the solution books, after main.css.
+   The book page itself stays light ("paper") in both themes; only the surrounding chrome follows the theme. */
+
+html {
+  padding-top: var(--bar-h);
+  scroll-padding-top: calc(var(--bar-h) + 16px);
+}
+
+@media screen {
+  html[data-theme="dark"] { background: #0c0c0e; }
+}
+@media screen and (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) { background: #0c0c0e; }
+}
+
+/* Keep the paper's own colours even when the chrome is dark. */
+html body { color-scheme: light; }
+
+/* Clickable Contents list */
+.toc .ch a { color: inherit; text-decoration: none; }
+.toc .ch a:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+/* Briefly highlight the section reached from search or the chapter menu. */
+:target { animation: target-flash 2.2s ease-out 1; }
+@keyframes target-flash {
+  0%, 35% { background-color: rgba(250, 204, 21, .35); }
+  100% { background-color: transparent; }
+}
+
+@media print {
+  html { padding-top: 0 !important; }
+  :target { animation: none; }
+}

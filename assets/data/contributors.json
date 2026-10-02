@@ -1,0 +1,29 @@
+{
+  "_note": "Placeholder entries. Replace with real contributors, then run: node scripts/build.js",
+  "contributors": [
+    {
+      "name": "Contributor Name",
+      "role": "Author",
+      "batch": "2K20",
+      "github": "",
+      "contributions": ["MTE 4011 · Set A", "MTE 4011 · Set B"],
+      "badges": ["Author"]
+    },
+    {
+      "name": "Contributor Name",
+      "role": "Reviewer",
+      "batch": "2K20",
+      "github": "",
+      "contributions": ["MTE 4103 · Set A"],
+      "badges": ["Reviewer"]
+    },
+    {
+      "name": "Contributor Name",
+      "role": "Figures & diagrams",
+      "batch": "2K20",
+      "github": "",
+      "contributions": ["MTE 4107 · Set B"],
+      "badges": ["Illustrator"]
+    }
+  ]
+}

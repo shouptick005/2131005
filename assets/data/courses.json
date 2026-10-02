@@ -1,0 +1,67 @@
+{
+  "site": {
+    "name": "MTE Solution Books",
+    "university": "Khulna University of Engineering & Technology",
+    "department": "Department of Mechatronics Engineering"
+  },
+  "terms": [
+    {
+      "id": "term-4-1",
+      "label": "Level 4 · Term 1",
+      "short": "4-1",
+      "courses": [
+        {
+          "code": "MTE 4011",
+          "slug": "MTE-4011",
+          "name": "Machine Learning",
+          "sets": {
+            "A": "Supervised learning: regression, classification, SVM and neural networks",
+            "B": "Unsupervised learning, clustering, KNN and dimensionality reduction"
+          }
+        },
+        {
+          "code": "MTE 4033",
+          "slug": "MTE-4033",
+          "name": "Automotive Vehicle Technology",
+          "sets": {
+            "A": "Engine, power train and chassis",
+            "B": "Vehicle electronics, ECU, ABS, TCS, ESP, EVs and autonomy"
+          }
+        },
+        {
+          "code": "MTE 4101",
+          "slug": "MTE-4101",
+          "name": "Industrial Automation",
+          "sets": {
+            "A": "Automation, Industry 4.0, networks, SCADA and process control",
+            "B": "PLC hardware and programming"
+          }
+        },
+        {
+          "code": "MTE 4103",
+          "slug": "MTE-4103",
+          "name": "Digital Signal Processing and Machine Vision",
+          "sets": {
+            "A": "Digital signal processing",
+            "B": "Machine vision and image processing"
+          }
+        },
+        {
+          "code": "MTE 4107",
+          "slug": "MTE-4107",
+          "name": "Design of Mechatronic Systems",
+          "sets": {
+            "A": "Design process, modelling, simulation, motion and control",
+            "B": "Sensors, actuators, drives, control and real-time systems"
+          }
+        }
+      ]
+    },
+    {
+      "id": "term-4-2",
+      "label": "Level 4 · Term 2",
+      "short": "4-2",
+      "courses": []
+    }
+  ]
+}

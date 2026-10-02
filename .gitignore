@@ -1,0 +1,19 @@
+# Original source books (kept locally as a backup until the migrated copies are verified)
+/MTE 4011 (Machine Learning)/
+/MTE 4033 (Automotive Vehicle Technology)/
+/MTE 4101 (Industrial Automation)/
+/MTE 4103 (Digital Signal Processing and Machine Vision)/
+/MTE 4107 (Design of Mechatronic Systems)/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+
+# Tooling
+node_modules/
+.vercel/
+.claude/settings.local.json
