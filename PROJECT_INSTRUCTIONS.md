@@ -39,6 +39,10 @@ mte_solution_book_website_ws/
 │       ├── contributors.json      # SOURCE: Hall of Fame data
 │       └── search-index.json      # [generated] Search index (committed to Git)
 │
+├── docs/
+│   ├── architecture.png           # Architecture diagram used in README
+│   └── architecture.html          # Diagram source; re-render command is in its header comment
+│
 ├── scripts/
 │   ├── build.js                   # Node, zero dependencies: processes books, generates pages + index
 │   └── serve.js                   # Local preview server that mimics Vercel clean URLs

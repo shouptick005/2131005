@@ -1,0 +1,173 @@
+<!doctype html>
+<!--
+  Source for docs/architecture.png. To regenerate the image after editing (Windows, Edge):
+  msedge --headless=new --hide-scrollbars --force-device-scale-factor=2 --window-size=1600,760
+         --screenshot=docs/architecture.png file:///<repo>/docs/architecture.html
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MTE Solution Books architecture</title>
+<style>
+  :root {
+    --ink: #1f2328; --muted: #59636e; --line: #d0d7de; --bg: #ffffff;
+    --src: #f6f8fa; --gen: #eef6ff; --gen-line: #0969da; --accent: #0969da;
+    --dark: #1f2328; --run: #1a7f37;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1600px; height: 760px; overflow: hidden; background: var(--bg); }
+  body { position: relative; font: 15px/1.4 "Segoe UI", system-ui, -apple-system, sans-serif; color: var(--ink); }
+  header { position: absolute; left: 48px; top: 34px; }
+  h1 { font-size: 26px; font-weight: 650; letter-spacing: -.01em; }
+  header p { color: var(--muted); margin-top: 4px; font-size: 15px; }
+  .group { position: absolute; border: 1.5px dashed var(--line); border-radius: 14px; background: var(--src); }
+  .group.gen { background: var(--gen); border-color: #9cc7f5; }
+  .group > .label { position: absolute; top: -11px; left: 16px; padding: 0 8px; background: var(--bg);
+    font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .group.gen > .label { color: var(--gen-line); }
+  .box { position: absolute; background: #fff; border: 1.5px solid var(--line); border-radius: 10px; padding: 11px 14px;
+    display: flex; flex-direction: column; justify-content: center; }
+  .box code { white-space: nowrap; }
+  .box b { display: block; font-size: 15px; font-weight: 600; }
+  .box code, .box .path { font: 13.5px/1.35 Consolas, "Cascadia Mono", monospace; color: var(--ink); }
+  .box .path { display: block; font-weight: 600; }
+  .box small { display: block; color: var(--muted); font-size: 13px; margin-top: 3px; }
+  .gen .box { border-color: #9cc7f5; }
+  .build { background: var(--dark); border-color: var(--dark); color: #fff; text-align: center; }
+  .build .path { color: #fff; font-size: 16px; }
+  .build small { color: #c9d1d9; }
+  .host { border-color: var(--ink); text-align: center; }
+  .browser { border-color: var(--run); }
+  .browser b { color: var(--run); }
+  .browser ul { list-style: none; padding: 0; margin-top: 6px; }
+  .browser li { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .browser li code { font-size: 12.5px; color: var(--ink); }
+  .tag { position: absolute; font-size: 12.5px; color: var(--muted); background: var(--bg); padding: 0 6px; white-space: nowrap; }
+  .note { position: absolute; left: 48px; bottom: 30px; font-size: 14px; color: var(--muted); }
+  .note code { font: 13.5px Consolas, monospace; color: var(--ink); background: var(--src); border: 1px solid var(--line);
+    border-radius: 6px; padding: 1px 6px; }
+  .legend { position: absolute; right: 48px; bottom: 30px; display: flex; gap: 22px; font-size: 13px; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 8px; }
+  .legend i { display: inline-block; width: 26px; border-top: 2px solid #57606a; }
+  .legend i.serve { border-color: var(--accent); }
+  .legend i.fetch { border-top-style: dashed; border-color: var(--run); }
+  svg { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>MTE Solution Books · Architecture</h1>
+    <p>Static site · zero-dependency Node build · hosted on Vercel</p>
+  </header>
+
+  <!-- arrows (drawn first so boxes sit on top) -->
+  <svg width="1600" height="760" viewBox="0 0 1600 760">
+    <defs>
+      <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0 0 L10 5 L0 10 z" fill="#57606a"/></marker>
+      <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0 0 L10 5 L0 10 z" fill="#0969da"/></marker>
+      <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0 0 L10 5 L0 10 z" fill="#1a7f37"/></marker>
+    </defs>
+    <g fill="none" stroke="#57606a" stroke-width="2" marker-end="url(#a)">
+      <!-- sources -> build -->
+      <path d="M376 233 C 425 233, 425 350, 460 352"/>
+      <path d="M376 343 C 420 343, 420 360, 460 360"/>
+      <path d="M376 453 C 425 453, 425 370, 460 368"/>
+      <!-- build -> generated -->
+      <path d="M686 352 C 720 345, 715 233, 748 233"/>
+      <path d="M686 360 C 715 360, 720 353, 748 353"/>
+      <path d="M686 368 C 720 375, 715 469, 748 469"/>
+    </g>
+    <!-- build writes books back in place -->
+    <path d="M574 410 C 574 540, 300 560, 300 500" fill="none" stroke="#57606a" stroke-width="2"
+          stroke-dasharray="2 5" stroke-linecap="round" marker-end="url(#a)"/>
+    <g fill="none" stroke="#0969da" stroke-width="2" marker-end="url(#b)">
+      <!-- generated -> host -->
+      <path d="M1068 233 C 1100 233, 1100 345, 1128 348"/>
+      <path d="M1068 353 C 1095 353, 1100 355, 1128 355"/>
+      <path d="M1068 469 C 1100 469, 1100 365, 1128 362"/>
+      <!-- static assets -> host -->
+      <path d="M376 623 H 1220 V 412"/>
+      <!-- host -> browser -->
+      <path d="M1310 355 H 1374"/>
+    </g>
+    <!-- browser fetches the search index lazily -->
+    <path d="M1466 452 C 1466 590, 1000 600, 1000 514" fill="none" stroke="#1a7f37" stroke-width="2"
+          stroke-dasharray="7 5" marker-end="url(#g)"/>
+  </svg>
+
+  <!-- SOURCE -->
+  <div class="group" style="left:48px; top:150px; width:348px; height:520px">
+    <span class="label">Source · you edit</span>
+  </div>
+  <div class="box" style="left:68px; top:188px; width:308px; height:90px">
+    <span class="path">assets/data/courses.json</span>
+    <small>Terms, courses, Set A / Set B descriptions</small>
+  </div>
+  <div class="box" style="left:68px; top:298px; width:308px; height:90px">
+    <span class="path">assets/data/contributors.json</span>
+    <small>Hall of Fame entries</small>
+  </div>
+  <div class="box" style="left:68px; top:408px; width:308px; height:90px">
+    <span class="path">term-4-1/MTE-xxxx/Set_A|B.html</span>
+    <small>The solution books (content)</small>
+  </div>
+  <div class="box" style="left:68px; top:578px; width:308px; height:90px; border-style:dashed">
+    <span class="path">assets/css · js · katex</span>
+    <small>Theme, search UI, math fonts — not built</small>
+  </div>
+
+  <!-- BUILD -->
+  <div class="box build" style="left:462px; top:310px; width:224px; height:100px">
+    <span class="path">scripts/build.js</span>
+    <small>idempotent · no dependencies</small>
+  </div>
+  <span class="tag" style="left:420px; top:548px">rewrites the books in place:<br>ids, site bar, linked Contents</span>
+
+  <!-- GENERATED -->
+  <div class="group gen" style="left:730px; top:150px; width:358px; height:380px">
+    <span class="label">Generated · do not edit</span>
+  </div>
+  <div class="box" style="left:750px; top:188px; width:318px; height:90px">
+    <b>Portal pages</b>
+    <small><code>index</code>, <code>term-*/index</code>, course pages, <code>search</code>, <code>hall-of-fame</code>, <code>404</code></small>
+  </div>
+  <div class="box" style="left:750px; top:298px; width:318px; height:110px">
+    <b>Enriched book pages</b>
+    <small>Same <code>Set_*.html</code> files with stable ids (<code>ch2</code>, <code>s2-5</code>, <code>q-s2-8</code>), site bar and clickable Contents</small>
+  </div>
+  <div class="box" style="left:750px; top:428px; width:318px; height:84px">
+    <span class="path">assets/data/search-index.json</span>
+    <small>Every chapter, section and question</small>
+  </div>
+
+  <!-- HOST -->
+  <div class="box host" style="left:1130px; top:296px; width:180px; height:118px">
+    <b>Web server</b>
+    <small><b style="display:inline;color:var(--ink);font-size:13px">Vercel</b> in production</small>
+    <small><code>serve.js</code> locally</small>
+    <small>clean URLs</small>
+  </div>
+  <span class="tag" style="left:1010px; top:600px">served as-is</span>
+
+  <!-- BROWSER -->
+  <div class="box browser" style="left:1376px; top:260px; width:180px; height:190px">
+    <b>Browser</b>
+    <ul>
+      <li><code>theme-toggle.js</code><br>light / dark</li>
+      <li><code>main.js</code><br>reader bar, progress</li>
+      <li><code>search.js</code><br>searches locally</li>
+    </ul>
+  </div>
+  <span class="tag" style="left:1290px; top:572px; color:#1a7f37">loads index on first search</span>
+
+  <p class="note">After changing anything in the source column, run <code>node scripts/build.js</code> and commit the generated files too.</p>
+  <div class="legend">
+    <span><i></i>build</span>
+    <span><i class="serve"></i>served</span>
+    <span><i class="fetch"></i>runtime fetch</span>
+  </div>
+</body>
+</html>

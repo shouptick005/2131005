@@ -107,6 +107,10 @@ node scripts/serve.js 3000   # preview at http://localhost:3000
 │       ├── contributors.json   # SOURCE: Hall of Fame entries
 │       └── search-index.json   # [generated] Search index
 │
+├── docs/
+│   ├── architecture.png        # Architecture diagram (shown below)
+│   └── architecture.html       # Source of the diagram
+│
 ├── scripts/
 │   ├── build.js                # Build script (zero dependencies)
 │   └── serve.js                # Local preview server (mimics Vercel clean URLs)
@@ -128,6 +132,8 @@ node scripts/serve.js 3000   # preview at http://localhost:3000
 ---
 
 ## How it works
+
+![Architecture: source files go through scripts/build.js to produce the portal pages, enriched books and search index, which the web server sends to the browser](docs/architecture.png)
 
 `scripts/build.js` is the only build step. It runs in a few seconds and is **idempotent**: running it again on unchanged input produces identical files.
 
