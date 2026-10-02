@@ -334,7 +334,24 @@ select.field { height: 36px; font-size: 14px; padding: 0 8px; }
   .search-kbd { display: none; }
   .set-switch a { padding: 5px 8px; }
   .chap-menu summary { padding: 5px 8px; }
-  .chap-menu ol { left: auto; right: -60px; }
+
+  /* Touch targets of at least 44px, with the bar looking the same. Controls that draw a border or
+     background keep their size and get a transparent 44px ::before; the others grow into negative margins. */
+  .set-switch a, .chap-menu summary, .bar-nav a { position: relative; }
+  .set-switch a::before, .chap-menu summary::before, .bar-nav a::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 44px; margin-top: -22px;
+  }
+  .set-switch { overflow: visible; }  /* so the ::before can reach outside; the end links round their own corners */
+  .set-switch a:first-child { border-radius: 6px 0 0 6px; }
+  .set-switch a:last-child { border-radius: 0 6px 6px 0; }
+  .brand { align-items: center; min-height: 44px; padding: 0 6px; margin: 0 -6px; }
+  .icon-btn { width: 44px; height: 44px; padding: 4px; border-radius: 12px; background-clip: content-box; }  /* hover fill stays 34px */
+  .search-toggle { margin: 0 -2px 0 -5px; }
+  .theme-btn { margin: 0 -5px 0 -2px; }
+
+  /* Place the list against the bar, not the button: the button's position changes with the width. */
+  .chap-menu { position: static; }
+  .chap-menu ol { top: calc(100% + 6px); left: 12px; width: min(380px, calc(100vw - 24px)); }
   .set-links { grid-template-columns: 1fr; }
   .set-link + .set-link { border-left: 0; border-top: 1px solid var(--ui-border); }
   .course-grid, .set-panels { grid-template-columns: 1fr; }
@@ -344,6 +361,12 @@ select.field { height: 36px; font-size: 14px; padding: 0 8px; }
 
 @media (max-width: 380px) {
   .chap-menu summary svg { display: none; }
+}
+
+/* A book's bar (brand, Set A/B, Chapters, search, theme) needs about 311px; 320px phones have 296px. */
+@media (max-width: 360px) {
+  .is-book .bar-inner { gap: 6px; padding: 0 10px; }
+  .is-book .set-switch a, .is-book .chap-menu summary { padding-left: 6px; padding-right: 6px; }
 }
 
 @media print {
