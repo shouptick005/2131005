@@ -11,20 +11,12 @@
     },
     {
       "Roll": "2131026",
-      "name": "Rahat",
-      "role": "Second In Command",
-      "batch": "2K21",
-      "github": "",
-      "contributions": ["MTE 4103 · Set A"],
-      "badges": ["Author"]
-    },
-    {
       "name": "Asifuzzaman Rahat",
-      "role": "Reviewer",
-      "batch": "2K20",
+      "role": "Godfather",
+      "batch": "2K21",
       "github": "github.com/rahat728",
-      "contributions": ["MTE 4103 · Set A"],
-      "badges": ["Reviewer"]
+      "contributions": ["Almost everything"],
+      "badges": ["Author"]
     }
   ]
 }
