@@ -1,5 +1,5 @@
 {
-  "_note": "Placeholder entries. Replace with real contributors, then run: node scripts/build.js",
+  "_note": "Hall of Fame entries. After editing, run: node scripts/build.js",
   "contributors": [
     {
       "Roll": "2131005",
@@ -19,12 +19,12 @@
       "badges": ["Author"]
     },
     {
-      "name": "Contributor Name",
-      "role": "Figures & diagrams",
+      "name": "Asifuzzaman Rahat",
+      "role": "Reviewer",
       "batch": "2K20",
-      "github": "",
-      "contributions": ["MTE 4107 · Set B"],
-      "badges": ["Illustrator"]
+      "github": "github.com/rahat728",
+      "contributions": ["MTE 4103 · Set A"],
+      "badges": ["Reviewer"]
     }
   ]
 }
