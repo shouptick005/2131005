@@ -2,11 +2,11 @@
   "_note": "Placeholder entries. Replace with real contributors, then run: node scripts/build.js",
   "contributors": [
     {
-      "name": "Contributor Name",
-      "role": "Author",
-      "batch": "2K20",
-      "github": "",
-      "contributions": ["MTE 4011 · Set A", "MTE 4011 · Set B"],
+      "Roll": "2131005",
+      "role": "Creator",
+      "batch": "2K21",
+      "github": "https://github.com/shouptick005",
+      "contributions": ["Everything"],
       "badges": ["Author"]
     },
     {

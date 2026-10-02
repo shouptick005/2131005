@@ -520,18 +520,30 @@ function initials(name) {
   return name.split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join('');
 }
 
+/** Accepts a GitHub username, @username or profile URL. */
+function githubUser(value) {
+  const v = String(value || '').trim();
+  const m = /^(?:https?:\/\/)?(?:www\.)?github\.com\/([A-Za-z0-9-]+)/i.exec(v);
+  return m ? m[1] : v.replace(/^@/, '');
+}
+
 function hallOfFamePage() {
   const cards = contributors.map((c) => {
+    const roll = c.roll || c.Roll || '';
+    const name = c.name || (roll ? `Roll ${roll}` : 'Anonymous');
+    const ghUser = githubUser(c.github);
     const badges = (c.badges || []).map((b) => `<span class="badge">${esc(b)}</span>`).join('');
     const work = (c.contributions || []).map((w) => `<li>${esc(w)}</li>`).join('');
-    const gh = c.github
-      ? `<a class="gh" href="https://github.com/${encodeURIComponent(c.github)}" rel="noopener">${ICON.github}${esc(c.github)}</a>`
+    const gh = ghUser
+      ? `<a class="gh" href="https://github.com/${encodeURIComponent(ghUser)}" rel="noopener">${ICON.github}${esc(ghUser)}</a>`
       : '';
+    const avatar = c.name ? initials(c.name) : (ghUser ? ghUser[0].toUpperCase() : '#');
+    const details = [c.role, c.batch, c.name && roll ? `Roll ${roll}` : ''].filter(Boolean).join(' · ');
     return `<article class="person">
-      <div class="avatar" aria-hidden="true">${esc(initials(c.name || '?'))}</div>
+      <div class="avatar" aria-hidden="true">${esc(avatar)}</div>
       <div class="person-body">
-        <h2>${esc(c.name)}</h2>
-        <p class="muted">${esc([c.role, c.batch].filter(Boolean).join(' · '))}</p>
+        <h2>${esc(name)}</h2>
+        <p class="muted">${esc(details)}</p>
         ${badges ? `<div class="badges">${badges}</div>` : ''}
         ${work ? `<ul class="work">${work}</ul>` : ''}
         ${gh}

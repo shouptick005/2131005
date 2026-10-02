@@ -189,7 +189,7 @@ Add an entry to `assets/data/contributors.json` and rebuild:
 }
 ```
 
-Every field except `name` is optional. Replace the placeholder entries currently in the file.
+All fields are optional. If you'd rather not show your name, leave out `name` and add `"roll": "2131005"` instead, and the card shows "Roll 2131005". `github` can be a username, `@username` or a full profile URL.
 
 ---
 
